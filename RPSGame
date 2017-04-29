@@ -2,7 +2,7 @@ import java.util.Random;
 public class RPSGame {
 	//ENUM
 	
-	public enum Moves {
+	static enum Moves {
 		ROCK, 
 		PAPER, 
 		SCISSORS;
@@ -49,6 +49,9 @@ public class RPSGame {
 	public void setNumOfTies(int numOfTies){
 		this.numOfTies=numOfTies;
 	}
+	public void setUserMove(Moves userMove){
+		this.userMove = userMove;
+	}
 	//toString Method
 	public String toString(){
 		String s = "Number Of Computer Wins:" + numOfComputerWins + "\nNumber Of User Wins:" + numOfUserWins +
@@ -59,7 +62,7 @@ public class RPSGame {
 	
 	//generateComputerPlay
 	
-	public void generateComputerPlay(){
+	public Moves generateComputerPlay(){
 		int randomNumber = randomNum.nextInt(3);
 
 		if (randomNumber == 0) {
@@ -69,36 +72,37 @@ public class RPSGame {
 		}else{
 		computerMove = Moves.SCISSORS;
 		}
+		return computerMove;
 	}
 	
 	//findWinner
 	
 	public void findWinner(){
-	boolean computerWin = false;
-	boolean userWin = false;
-	//need to pull in userMove
-	Moves userMove = null;
-	generateComputerPlay();
-	if (computerMove == Moves.ROCK && userMove == Moves.SCISSORS){
-		computerWin = true;
-	} else if (computerMove == Moves.PAPER && userMove == Moves.ROCK){
-		computerWin = true;
-	} else if (computerMove == Moves.SCISSORS && userMove == Moves.PAPER){
-		computerWin = true;
-	} else if (userMove == Moves.ROCK && computerMove == Moves.SCISSORS){
-		userWin = true;
-	} else if (userMove == Moves.PAPER && computerMove == Moves.ROCK){
-		userWin = true;
-	} else if (userMove == Moves.SCISSORS && computerMove == Moves.PAPER){
-		userWin = true;
-	}
-	
-	if (computerWin == true){
-		numOfComputerWins+=1;
-	} else if (userWin == true){
-		numOfUserWins+=1;
-	}else {
-		numOfTies+=1;
-	}
+		boolean computerWin = false;
+		boolean userWin = false;
+		//need to pull in userMove
+//		Moves userMove = null;
+		generateComputerPlay();
+		if (computerMove == Moves.ROCK && userMove == Moves.SCISSORS){
+			computerWin = true;
+		} else if (computerMove == Moves.PAPER && userMove == Moves.ROCK){
+			computerWin = true;
+		} else if (computerMove == Moves.SCISSORS && userMove == Moves.PAPER){
+			computerWin = true;
+		} else if (userMove == Moves.ROCK && computerMove == Moves.SCISSORS){
+			userWin = true;
+		} else if (userMove == Moves.PAPER && computerMove == Moves.ROCK){
+			userWin = true;
+		} else if (userMove == Moves.SCISSORS && computerMove == Moves.PAPER){
+			userWin = true;
+		}
+		
+		if (computerWin == true){
+			numOfComputerWins+=1;
+		} else if (userWin == true){
+			numOfUserWins+=1;
+		}else {
+			numOfTies+=1;
+		}
 	}
 }
